@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16611688730150" configfile="/jsf1-project/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="122" y="178" id="pf16611691266831" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin-instructor.xhtml" x="554" y="562" id="pf16611691266883" referenceLink="//@navigationRule.2/@navigationCase.2/@toViewId|" outlinks="pf166123764582712 pf166123764582713 pf166125183168017" inlinks="pf166123764582714 pf166123764582713 pf166125183168018" path="admin/admin-instructor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin-student.xhtml" x="338" y="360" id="pf166123764582715" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" outlinks="pf166123764582716 pf166123764582714 pf166125183168019" inlinks="pf166123764582716 pf166123764582712 pf166125183168020" path="admin/admin-student.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin/home.xhtml" x="122" y="562" id="pf166125183168021" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" outlinks="pf166125183168022 pf166125183168020 pf166125183168018" inlinks="pf166125183168022 pf166125183168019 pf166125183168017" path="admin/home.xhtml"/>
+  <links id="pf166123764582714" target="pf16611691266883" source="pf166123764582715" outcome="admin-student-instructor"/>
+  <links id="pf166123764582712" target="pf166123764582715" source="pf16611691266883" outcome="admin-instructor-student"/>
+  <links id="pf166125183168020" target="pf166123764582715" source="pf166125183168021" outcome="admin-course-student"/>
+  <links id="pf166125183168018" target="pf16611691266883" source="pf166125183168021" outcome="admin-course-instructor"/>
+  <links id="pf166125183168019" target="pf166125183168021" source="pf166123764582715" outcome="admin-student-course"/>
+  <links id="pf166125183168017" target="pf166125183168021" source="pf16611691266883" outcome="admin-instructor-course"/>
+  <links id="pf166123764582716" target="pf166123764582715" source="pf166123764582715" outcome="admin-student-student">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf166123764582713" target="pf16611691266883" source="pf16611691266883" outcome="admin-instructor-instructor">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf166125183168022" target="pf166125183168021" source="pf166125183168021" outcome="admin-course-course">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+</pageflow:Pageflow>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions"
+    xmlns:p="http://primefaces.org/ui">
+
+     <h:head>
+
+     </h:head>
+
+     <h:body>
+
+<div class="card">
+<h:form id="form">
+	  <p:growl id="messages" showDetail="true" />
+	  
+	     <div class="card">
+    <p:tabMenu activeIndex="#{param.i}">
+        <p:menuitem value="Course" outcome="#{adminInstructor.toCourses}" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+        </p:menuitem>
+        <p:menuitem value="Student" outcome="#{adminInstructor.toStudents}" icon="pi pi-fw pi-calendar">
+            <f:param name="i" value="1"/>
+        </p:menuitem>
+        <p:menuitem value="Instructor" outcome="#{adminInstructor.toInstructors}" icon="pi pi-fw pi-pencil">
+            <f:param name="i" value="2"/>
+        </p:menuitem>
+        
+    </p:tabMenu>
+</div>
+	  
+	  
+	  <p:toolbar>
+            <p:toolbarGroup>
+                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{adminInstructor.openNew}"
+                    update=":dialogs:manage-instructor-content" oncomplete="PF('manageInstructorDialog').show()"
+                    styleClass="ui-button-success" style="margin-right: .5rem">
+                    <p:resetInput target=":dialogs:manage-instructor-content" />
+                </p:commandButton>
+                
+            </p:toolbarGroup>
+            
+        </p:toolbar>
+	
+    <p:dataTable id="dt-instructors" var="instructor" value="#{adminInstructor.instructors}">
+        <f:facet name="header">
+            List of Instructors
+        </f:facet>
+
+        <p:column headerText="Instructor First Name">
+            <h:outputText value="#{instructor.firstName}" />
+        </p:column>
+
+        <p:column headerText="Instructor Last Name">
+            <h:outputText value="#{instructor.lastName}" />
+        </p:column>
+        <p:column headerText="Instructor email">
+            <h:outputText value="#{instructor.email}" />
+        </p:column>
+		<p:column exportable="false">
+                <p:commandButton icon="pi pi-pencil" update=":dialogs:manage-instructor-content"
+                oncomplete="PF('manageInstructorDialog').show()"
+                    styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{instructor}" target="#{adminInstructor.selectedInstructor}"/>
+                    <p:resetInput target=":dialogs:manage-instructor-content" />
+                </p:commandButton>
+                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" 
+                process="@this" oncomplete="PF('deleteInstructorDialog').show()">
+                    <f:setPropertyActionListener value="#{instructor}" target="#{adminInstructor.selectedInstructor}"/>
+                </p:commandButton>
+            </p:column>
+    </p:dataTable>
+</h:form>
+</div>
+
+
+<h:form id="dialogs">
+	<p:dialog header="Instructor Details" showEffect="fade" model="true" widgetVar="manageInstructorDialog"
+	responsive="true">
+	<p:outputPanel id="manage-instructor-content" class="ui-fluid">
+		<p:outputPanel>
+		<div class="field">
+				<p:outputLabel for="email">Instructor Email</p:outputLabel>
+				<p:inputText id="email" value="#{adminInstructor.selectedInstructor.email}" required="true" type="email"/>
+			</div>
+			<div class="field">
+				<p:outputLabel for="firstName">Instructor First Name</p:outputLabel>
+				<p:inputText id="firstName" value="#{adminInstructor.selectedInstructor.firstName}" required="true"/>
+			</div>
+			<div class="field">
+				<p:outputLabel for="lastName">Instructor Last Name</p:outputLabel>
+				<p:inputText id="lastName" value="#{adminInstructor.selectedInstructor.lastName}" required="true"/>
+			</div>
+			<div class="field">
+				<p:outputLabel for="password">Instructor Password</p:outputLabel>
+				<p:inputText id="password" value="#{adminInstructor.selectedInstructor.password}" required="true" type="password"/>
+			</div>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<f:facet name="footer">
+                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{adminInstructor.saveInstructor}"
+                    update="manage-instructor-content" process="manage-instructor-content @this" />
+                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageInstructorDialog').hide()"
+                    class="ui-button-secondary" type="button" />
+    </f:facet>
+	
+	</p:dialog>
+</h:form>
+
+
+
+ <p:confirmDialog widgetVar="deleteInstructorDialog" showEffect="fade" width="300"
+            message="Delete this Instructor?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{adminInstructor.deleteInstructor}"
+                process="@this" oncomplete="PF('deleteInstructorDialog').hide()" />
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                onclick="PF('deleteInstructorDialog').hide()" />
+        </p:confirmDialog>
+
+     </h:body>
+</html>

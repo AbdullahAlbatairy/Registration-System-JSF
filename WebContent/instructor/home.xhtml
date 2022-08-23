@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+     <h:head>
+
+     </h:head>
+
+     <h:body>
+
+<div class="card">
+<h:form id="form">
+	  <p:growl id="messages" showDetail="true" />
+	  
+	    <div class="card">
+    <p:tabMenu activeIndex="#{param.i}">
+        <p:menuitem value="Course" outcome="#{instructorHome.toCourses}" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+        </p:menuitem>
+        
+    </p:tabMenu>
+</div>
+	  
+	
+    <p:dataTable id="dt-courses" var="course" value="#{instructorHome.courses}">
+        <f:facet name="header">
+            List of Courses
+        </f:facet>
+
+        <p:column headerText="Course Name">
+            <h:outputText value="#{course.courseName}" />
+        </p:column>
+
+        <p:column headerText="Course Description">
+            <h:outputText value="#{course.courseDesc}" />
+        </p:column>
+		<p:column exportable="false">
+                <p:commandButton icon="pi pi-user" update=":dialogs:view-students-content"
+                oncomplete="PF('viewStudentDialog').show()" onclick="#{instructorHome.students}"
+                    styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{course}" target="#{instructorHome.selectedCourse}"/>
+                    <p:resetInput target=":dialogs:view-students-content" />
+                </p:commandButton>
+            </p:column>
+    </p:dataTable>
+</h:form>
+</div>
+
+
+<h:form id="dialogs">
+	<p:dialog header="Student List" showEffect="fade" model="true" widgetVar="viewStudentDialog"
+	responsive="true">
+	<p:outputPanel id="view-students-content" class="ui-fluid">
+		<p:outputPanel>
+			<p:dataTable id="dt-courses" var="student" value="#{instructorHome.students}">
+        
+
+        <p:column headerText="Student First Name">
+            <h:outputText value="#{student.firstName}" />
+        </p:column>
+
+        <p:column headerText="Student Last Name">
+            <h:outputText value="#{student.lastName}" />
+        </p:column>
+		
+    </p:dataTable>
+		</p:outputPanel>
+	</p:outputPanel>
+	
+	<f:facet name="footer">
+                <p:commandButton value="Close" icon="pi pi-times" onclick="PF('viewStudentDialog').hide()"
+                    class="ui-button-secondary" type="button" />
+    </f:facet>
+	
+	</p:dialog>
+</h:form>
+
+
+
+ <p:confirmDialog widgetVar="deleteCourseDialog" showEffect="fade" width="300"
+            message="Delete the Course?" header="Confirm" severity="warn">
+            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{instructorHome.deleteCourse}"
+                process="@this" oncomplete="PF('deleteCourseDialog').hide()" />
+            <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                onclick="PF('deleteCourseDialog').hide()" />
+        </p:confirmDialog>
+
+     </h:body>
+</html>

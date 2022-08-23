@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+<!-- Admin Routing -->
+	<navigation-rule>
+		<from-view-id>admin/home.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>admin-course-course</from-outcome>
+			<to-view-id>/admin/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-course-student</from-outcome>
+			<to-view-id>/admin/admin-student.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-course-instructor</from-outcome>
+			<to-view-id>/admin/admin-instructor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>admin/admin-student.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>admin-student-course</from-outcome>
+			<to-view-id>/admin/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-student-student</from-outcome>
+			<to-view-id>/admin/admin-student.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-student-instructor</from-outcome>
+			<to-view-id>/admin/admin-instructor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<navigation-rule>
+		<from-view-id>admin/admin-instructor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>admin-instructor-course</from-outcome>
+			<to-view-id>/admin/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-instructor-student</from-outcome>
+			<to-view-id>/admin/admin-student.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>admin-instructor-instructor</from-outcome>
+			<to-view-id>/admin/admin-instructor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+<!-- Instructor Routing -->
+<navigation-rule>
+		<from-view-id>instructor/home.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>instructor-course-course</from-outcome>
+			<to-view-id>/instructor/home.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>
+
+<!-- Student Routing -->
+
+
+</faces-config>
